@@ -395,7 +395,7 @@ def axfr_query(domain: str,
 
         ret += response.answers
         #last (but not the only!) response is SOA - finishing
-        if len(ret) > 0 and ret[-1].rdata_type == SOA:
+        if len(ret) > 1 and ret[-1].rdata_type == SOA:
             break
 
     sock.close()
