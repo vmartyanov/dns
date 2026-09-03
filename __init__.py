@@ -343,7 +343,10 @@ def udp_query(domain: str,          # pylint: disable=too-many-arguments
     except TimeoutError:
         reply = b""
 
-    for answer in DNSMessage(reply).answers:
+    #Yes, combine all and then filter by answer type
+    answers = DNSMessage(reply).answers + DNSMessage(reply).authorities + DNSMessage(reply).additionals
+
+    for answer in answers:
         if answer.rdata_type != q_type:     #YES, WE CAN receive extra responses
             continue
         ret.append(answer)
