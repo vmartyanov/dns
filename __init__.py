@@ -202,6 +202,14 @@ class ResourceRecord():
 
         return length + 10 + self.rdata_len
 
+    def __str__(self):
+        res = self.name
+        res += "\t" + str(self.ttl)
+        res += "\t" + CLASSES[self.rdata_class]
+        res += "\t" + TYPES[self.rdata_type]
+        res += "\t" + self.rdata
+        return res
+
 class DNSQuestion():
     """DNS question."""
     def __init__(self) -> None:
@@ -215,6 +223,8 @@ class DNSQuestion():
         parts = self.name.split('.')
         for part in parts:
             part_len = len(part)
+            if part_len == 0:           #if we're querying ru. for root zone, for example
+                continue
             if part_len > 63:
                 raise DNSException("Name is too long")
             ret += struct.pack("B", part_len)
