@@ -87,6 +87,8 @@ def read_name(data: bytes, start_offset: int) -> tuple[str, int]:
     ret_len = 0
     ret_str = ""
     while True:
+        if start_offset + ret_len >= len(data):
+            raise DNSException("No data")
         l = data[start_offset + ret_len]
         if l >= 0xC0:     #offset
             offset = struct.unpack("!H", data[start_offset + ret_len : start_offset + ret_len + 2])[0]
@@ -237,6 +239,8 @@ class DNSQuestion():
         """Deserialize object from bytes."""
         self.name, length = read_name(data, offset)
         offset += length
+        if offset + 4 > len(data):
+            raise DNSException("No data")
         self.type, self.q_class = struct.unpack("!HH", data[offset : offset + 4])
         return length + 4
 
