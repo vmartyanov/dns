@@ -38,6 +38,7 @@ TLSA        = 52
 CDS         = 59
 CDNSKEY     = 60
 OPENPGPKEY  = 61
+ZONEMD      = 63
 SPF         = 99
 AXFR        = 252
 CAA         = 257
@@ -53,7 +54,7 @@ TYPES = {0: "UNKNOWN", 1: "A", 2: "NS", 3: "MD", 4: "MF", 5: "CNAME", 6: "SOA", 
         33: "SRV", 35: "NAPTR", 39: "DNAME",
         43: "DS", 44: "SSHFP", 46: "RRSIG", 47: "NSEC", 48: "DNSKEY",
         50: "NSEC3", 51: "NSEC3PARAM", 52: "TLSA", 59: "CDS",
-        60: "CDNSKEY", 61: "OPENPGPKEY",
+        60: "CDNSKEY", 61: "OPENPGPKEY", 63: "ZONEMD",
         99: "SPF",
         252: "AXFR", 257: "CAA",
         65534: "PRIV65534"
